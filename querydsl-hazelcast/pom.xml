@@ -13,6 +13,7 @@
   <name>Querydsl - Hazelcast support</name>
   <description>Hazelcast support for Querydsl</description>
   <packaging>jar</packaging>
+  <url>${project.homepage}</url>
 
   <scm>
     <connection>${project.checkout}</connection>
