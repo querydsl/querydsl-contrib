@@ -17,8 +17,18 @@
   <packaging>jar</packaging>
 
   <properties>
+    <project.homepage>http://www.querydsl.com</project.homepage>
+    <project.githubpage>http://github.com/querydsl/querydsl-contrib</project.githubpage>
+    <project.checkout>scm:git:git@github.com:querydsl/querydsl-contrib.git</project.checkout>
+
     <aws.version>1.6.4</aws.version>
   </properties>
+
+  <scm>
+    <connection>${project.checkout}</connection>
+    <developerConnection>${project.checkout}</developerConnection>
+    <url>${project.githubpage}</url>
+  </scm>
 
   <dependencies>
     <dependency>

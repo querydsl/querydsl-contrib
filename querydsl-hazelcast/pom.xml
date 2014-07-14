@@ -16,8 +16,18 @@
   <packaging>jar</packaging>
 
   <properties>
+    <project.homepage>http://www.querydsl.com</project.homepage>
+    <project.githubpage>http://github.com/querydsl/querydsl-contrib</project.githubpage>
+    <project.checkout>scm:git:git@github.com:querydsl/querydsl-contrib.git</project.checkout>
+
     <hazelcast.version>3.1.2</hazelcast.version>
   </properties>
+
+  <scm>
+    <connection>${project.checkout}</connection>
+    <developerConnection>${project.checkout}</developerConnection>
+    <url>${project.githubpage}</url>
+  </scm>
 
   <dependencies>
     <dependency>
