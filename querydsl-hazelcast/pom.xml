@@ -9,7 +9,7 @@
     <relativePath>../querydsl-root/pom.xml</relativePath>
   </parent>
 
-  <groupId>com.mysema.querydsl</groupId>
+  <groupId>com.mysema.querydsl.contrib</groupId>
   <artifactId>querydsl-hazelcast</artifactId>
   <name>Querydsl - Hazelcast support</name>
   <description>Hazelcast support for Querydsl</description>
