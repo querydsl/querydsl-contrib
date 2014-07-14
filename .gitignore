@@ -2,9 +2,11 @@
 target
 bin
 test-output
+.idea
 .classpath
 .project
 .settings
+*.iml
 /.metadata
 .cache
 derby.log
