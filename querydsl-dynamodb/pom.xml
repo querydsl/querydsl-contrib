@@ -15,6 +15,13 @@
   <name>Querydsl - Dynamodb support</name>
   <description>Amazon Dynamodb support for Querydsl</description>
   <packaging>jar</packaging>
+  <url>${project.homepage}</url>
+
+  <scm>
+    <connection>${project.checkout}</connection>
+    <developerConnection>${project.checkout}</developerConnection>
+    <url>${project.githubpage}</url>
+  </scm>
 
   <properties>
     <aws.version>1.6.4</aws.version>
