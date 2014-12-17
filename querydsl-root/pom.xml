@@ -49,6 +49,7 @@
   <modules>
     <module>../querydsl-dynamodb</module>
     <module>../querydsl-hazelcast</module>
+    <module>../querydsl-elasticsearch</module>
   </modules>
 
 </project>
