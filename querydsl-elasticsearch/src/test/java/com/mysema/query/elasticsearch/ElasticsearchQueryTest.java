@@ -229,7 +229,7 @@ public class ElasticsearchQueryTest {
     }
 
     private ElasticsearchQuery<User> query() {
-        return new JacksonElasticsearchQueries(client).query(QUser.user, indexUser, typeUser);
+        return new JacksonElasticsearchQueries(client).query(User.class, indexUser, typeUser);
     }
 
     private ElasticsearchQuery<User> where(Predicate predicate) {

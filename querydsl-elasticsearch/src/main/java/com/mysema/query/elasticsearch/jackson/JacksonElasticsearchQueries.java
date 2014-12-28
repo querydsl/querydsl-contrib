@@ -1,16 +1,17 @@
 package com.mysema.query.elasticsearch.jackson;
 
+import java.io.IOException;
+import java.lang.reflect.Field;
+
+import javax.annotation.Nullable;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Function;
 import com.mysema.query.elasticsearch.ElasticsearchQuery;
 import com.mysema.query.elasticsearch.ElasticsearchSerializer;
-import com.mysema.query.types.EntityPath;
+
 import org.elasticsearch.client.Client;
 import org.elasticsearch.search.SearchHit;
-
-import javax.annotation.Nullable;
-import java.io.IOException;
-import java.lang.reflect.Field;
 
 /**
  * JacksonElasticsearchQueries is a factory to provide ElasticsearchQuery basic implementation.
@@ -30,26 +31,26 @@ public class JacksonElasticsearchQueries {
         this.client = client;
     }
 
-    public <K> ElasticsearchQuery<K> query(EntityPath<K> entityPath, String index, String type) {
-        return query(entityPath, index, type, new ElasticsearchSerializer());
+    public <K> ElasticsearchQuery<K> query(Class<K> entityClass, String index, String type) {
+        return query(entityClass, index, type, new ElasticsearchSerializer());
     }
 
-    public <K> ElasticsearchQuery<K> query(EntityPath<K> entityPath, String index, String type, ElasticsearchSerializer serializer) {
-        return query(entityPath, index, type, serializer, defaultTransformer(entityPath));
+    public <K> ElasticsearchQuery<K> query(Class<K> entityClass, String index, String type, ElasticsearchSerializer serializer) {
+        return query(index, type, serializer, defaultTransformer(entityClass));
     }
 
-    public <K> ElasticsearchQuery<K> query(EntityPath<K> entityPath, String index, String type, Function<SearchHit, K> transformer) {
-        return query(entityPath, index, type, new ElasticsearchSerializer(), transformer);
+    public <K> ElasticsearchQuery<K> query(String index, String type, Function<SearchHit, K> transformer) {
+        return query(index, type, new ElasticsearchSerializer(), transformer);
     }
 
-    public <K> ElasticsearchQuery<K> query(EntityPath<K> entityPath, final String index, final String type, ElasticsearchSerializer serializer, Function<SearchHit, K> transformer) {
-        return new ElasticsearchQuery<K>(client, transformer, serializer, entityPath) {
+    public <K> ElasticsearchQuery<K> query(final String index, final String type, ElasticsearchSerializer serializer, Function<SearchHit, K> transformer) {
+        return new ElasticsearchQuery<K>(client, transformer, serializer) {
 
             /**
              * {@inheritDoc}
              */
             @Override
-            public String getIndex(Class<? extends K> entityType) {
+            public String getIndex() {
                 return index;
             }
 
@@ -57,7 +58,7 @@ public class JacksonElasticsearchQueries {
              * {@inheritDoc}
              */
             @Override
-            public String getType(Class<? extends K> entityType) {
+            public String getType() {
                 return type;
             }
 
@@ -67,11 +68,11 @@ public class JacksonElasticsearchQueries {
     /**
      * Returns the default transformer.
      *
-     * @param entityPath The entity path.
+     * @param entityClass The entity class.
      * @param <K> The entity type.
      * @return The default transformer.
      */
-    private <K> Function<SearchHit, K> defaultTransformer(final EntityPath<K> entityPath) {
+    private <K> Function<SearchHit, K> defaultTransformer(final Class<K> entityClass) {
         final ObjectMapper mapper = new ObjectMapper();
         return new Function<SearchHit, K>() {
 
@@ -82,11 +83,10 @@ public class JacksonElasticsearchQueries {
             @Override
             public K apply(@Nullable SearchHit input) {
                 try {
-                    Class<? extends K> entityType = entityPath.getType();
-                    K bean = mapper.readValue(input.getSourceAsString(), entityType);
+                    K bean = mapper.readValue(input.getSourceAsString(), entityClass);
 
                     Field idField = null;
-                    Class<?> target = entityType;
+                    Class<?> target = entityClass;
                     while (idField == null && target != Object.class) {
                         for (Field field : target.getDeclaredFields()) {
                             if ("id".equals(field.getName())) {

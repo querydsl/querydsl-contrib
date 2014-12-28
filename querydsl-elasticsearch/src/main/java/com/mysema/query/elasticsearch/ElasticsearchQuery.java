@@ -48,15 +48,11 @@ public abstract class ElasticsearchQuery<K> implements SimpleQuery<Elasticsearch
 
     private final ElasticsearchSerializer serializer;
 
-    private final EntityPath<K> entityPath;
-
-    public ElasticsearchQuery(Client client, Function<SearchHit, K> transformer, ElasticsearchSerializer serializer,
-                              EntityPath<K> entityPath) {
+    public ElasticsearchQuery(Client client, Function<SearchHit, K> transformer, ElasticsearchSerializer serializer) {
         this.queryMixin = new QueryMixin<ElasticsearchQuery<K>>(this, new DefaultQueryMetadata().noValidate(), false);
         this.client = client;
         this.transformer = transformer;
         this.serializer = serializer;
-        this.entityPath = entityPath;
     }
 
     @Override
@@ -256,16 +252,8 @@ public abstract class ElasticsearchQuery<K> implements SimpleQuery<Elasticsearch
         return requestBuilder.execute().actionGet();
     }
 
-    public String getIndex() {
-        return getIndex(entityPath.getType());
-    }
+    public abstract String getIndex();
 
-    public abstract String getIndex(Class<? extends K> entityType);
-
-    public String getType() {
-        return getType(entityPath.getType());
-    }
-
-    public abstract String getType(Class<? extends K> entityType);
+    public abstract String getType();
 
 }
