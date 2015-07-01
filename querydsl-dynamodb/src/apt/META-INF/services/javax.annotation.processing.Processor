@@ -1,1 +1,1 @@
-com.mysema.query.dynamodb.apt.DynamoAnnotationProcessor
+com.querydsl.dynamodb.apt.DynamoAnnotationProcessor

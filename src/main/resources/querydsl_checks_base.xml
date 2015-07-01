@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+  <property name="charset" value="UTF-8"/>
+  <property name="fileExtensions" value="java, properties, xml"/>
+
+  <!-- maximum file length 2000 lines -->
+  <module name="FileLength"/>
+
+  <!-- check that there are no tab characters in the file -->
+  <module name="FileTabCharacter">
+    <property name="eachLine" value="true"/>
+  </module>
+
+  <!-- no trailing whitespace -->
+  <module name="RegexpSingleline">
+    <property name="format" value="\s+$"/>
+    <property name="message" value="Line has trailing spaces."/>
+  </module>
+
+  <module name="TreeWalker">
+
+    <property name="cacheFile" value="${checkstyle.cache.file}"/>
+
+    <module name="SuppressWarningsHolder"/>
+
+    <!-- <module name="ConstantName"/> -->
+    <module name="LocalFinalVariableName"/>
+    <module name="LocalVariableName"/>
+    <!-- FIXME, fails with _super in various places
+    <module name="MemberName"/>
+    -->
+    <module name="PackageName"/>
+    <module name="ParameterName"/>
+    <module name="StaticVariableName"/>
+    <!-- FIXME, fails with various generated classes
+    <module name="TypeName"/>-->
+
+    <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
+    <!-- XXX <module name="RedundantImport"/> -->
+    <module name="UnusedImports">
+      <property name="processJavadoc" value="true"/>
+    </module>
+
+    <!-- <module name="ImportOrder">
+      <property name="groups" value="java,javax,org,com"/>
+      <property name="ordered" value="false"/>
+      <property name="option" value="top"/>
+      <property name="sortStaticImportsAlphabetically" value="true"/>
+    </module> -->
+
+    <!-- FIXME <module name="LineLength"> -->
+    <!-- FIXME <module name="MethodLength"/> -->
+
+    <module name="EmptyForIteratorPad"/>
+    <module name="MethodParamPad"/>
+    <module name="NoWhitespaceAfter"/>
+    <module name="NoWhitespaceBefore"/>
+    <module name="ParenPad"/>
+    <module name="TypecastParenPad"/>
+
+    <module name="WhitespaceAfter">
+      <property name="tokens" value="SEMI, TYPECAST"/>
+    </module>
+    <module name="WhitespaceAround"/>
+
+    <module name="ModifierOrder"/>
+    <module name="RedundantModifier"/>
+
+    <module name="EmptyBlock"/>
+    <module name="LeftCurly"/>
+    <module name="NeedBraces"/>
+    <module name="RightCurly"/>
+
+    <module name="EmptyStatement"/>
+    <module name="IllegalInstantiation"/>
+    <!-- FIXME <module name="InnerAssignment"/> -->
+    <module name="SimplifyBooleanExpression"/>
+    <!-- FIXME <module name="SimplifyBooleanReturn"/> -->
+
+    <module name="FinalClass"/>
+    <module name="HideUtilityClassConstructor"/>
+    <module name="InterfaceIsType"/>
+    <module name="ArrayTypeStyle"/>
+    <module name="UpperEll"/>
+
+  </module>
+
+  <module name="SuppressWarningsFilter"/>
+  <module name="UniqueProperties"/>
+
+</module>

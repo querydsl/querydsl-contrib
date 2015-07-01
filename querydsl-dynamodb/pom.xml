@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.mysema.querydsl.contrib</groupId>
-    <artifactId>querydsl-root</artifactId>
-    <version>3.6.1.BUILD-SNAPSHOT</version>
-    <relativePath>../querydsl-root/pom.xml</relativePath>
+    <groupId>com.querydsl.contrib</groupId>
+    <artifactId>querydsl-contrib</artifactId>
+    <version>4.0.3.BUILD-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>querydsl-dynamodb</artifactId>
@@ -34,25 +34,12 @@
     </dependency>
 
     <dependency>
-      <groupId>com.mysema.querydsl</groupId>
-      <artifactId>querydsl-core</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.mysema.querydsl</groupId>
+      <groupId>com.querydsl</groupId>
       <artifactId>querydsl-apt</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
@@ -66,14 +53,6 @@
       <artifactId>alternator</artifactId>
       <version>0.7.1</version>
       <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.mysema.querydsl</groupId>
-      <artifactId>querydsl-core</artifactId>
-      <version>${project.version}</version>
-      <scope>test</scope>
-      <type>test-jar</type>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
@@ -102,7 +81,7 @@
             </goals>
             <configuration>
               <outputDirectory>target/generated-test-sources/java</outputDirectory>
-              <processor>com.mysema.query.dynamodb.apt.DynamoAnnotationProcessor</processor>
+              <processor>com.querydsl.dynamodb.apt.DynamoAnnotationProcessor</processor>
               <options>
                 <defaultOverwrite>true</defaultOverwrite>
               </options>
