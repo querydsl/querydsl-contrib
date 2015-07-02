@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.querydsl.core.types.Predicate;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -185,7 +186,7 @@ public class DynamoDBQueryTest {
         return new DynamoDBQuery<User>(client, user);
     }
 
-    private DynamoDBQuery<User> where(com.querydsl.core.types.Predicate... e) {
+    private DynamoDBQuery<User> where(Predicate... e) {
         return query().where(e);
     }
 

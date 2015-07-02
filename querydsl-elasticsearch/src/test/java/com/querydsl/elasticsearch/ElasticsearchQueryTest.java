@@ -120,7 +120,7 @@ public class ElasticsearchQueryTest {
     @Test
     public void Equals_Ignore_Case() {
         assertTrue(where(user.firstName.equalsIgnoreCase("jAaKko")).fetchCount() > 0);
-        assertFalse(where(user.firstName.equalsIgnoreCase("AaKk")).fetchCount() == 0);
+        assertTrue(where(user.firstName.equalsIgnoreCase("AaKk")).fetchCount() == 0);
     }
 
     @Test
@@ -132,7 +132,7 @@ public class ElasticsearchQueryTest {
     @Test
     public void Exists() {
         assertTrue(where(user.firstName.eq("Jaakko")).fetchCount() > 0);
-        assertFalse(where(user.firstName.eq("JaakkoX")).fetchCount() == 0);
+        assertTrue(where(user.firstName.eq("JaakkoX")).fetchCount() == 0);
         assertTrue(where(user.id.eq(u1.getId())).fetchCount() > 0);
     }
 
