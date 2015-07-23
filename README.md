@@ -11,6 +11,7 @@ They are released in sync with the Querydsl major and minor releases.
 Currently included are
 
 * Querydsl DynamoDB
+* Querydsl Elasticsearch
 * Querydsl Hazelcast
 
 The licensing and copyright is the same as for the main Querydsl modules.
