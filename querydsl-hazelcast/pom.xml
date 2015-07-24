@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.mysema.querydsl.contrib</groupId>
-    <artifactId>querydsl-root</artifactId>
-    <version>3.6.1.BUILD-SNAPSHOT</version>
-    <relativePath>../querydsl-root/pom.xml</relativePath>
+    <groupId>com.querydsl.contrib</groupId>
+    <artifactId>querydsl-contrib</artifactId>
+    <version>4.0.3.BUILD-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>querydsl-hazelcast</artifactId>
@@ -40,34 +40,12 @@
     </dependency>
 
     <dependency>
-      <groupId>com.mysema.querydsl</groupId>
-      <artifactId>querydsl-core</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.mysema.querydsl</groupId>
+      <groupId>com.querydsl</groupId>
       <artifactId>querydsl-apt</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-    </dependency>
-
-    <!-- test -->
-    <dependency>
-      <groupId>com.mysema.querydsl</groupId>
-      <artifactId>querydsl-core</artifactId>
-      <version>${project.version}</version>
-      <scope>test</scope>
-      <type>test-jar</type>
-    </dependency>
   </dependencies>
 
   <build>
@@ -88,7 +66,7 @@
             </goals>
             <configuration>
               <outputDirectory>target/generated-test-sources/java</outputDirectory>
-              <processor>com.mysema.query.apt.QuerydslAnnotationProcessor</processor>
+              <processor>com.querydsl.apt.QuerydslAnnotationProcessor</processor>
               <showWarnings>true</showWarnings>
             </configuration>
           </execution>

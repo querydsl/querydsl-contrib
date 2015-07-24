@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.querydsl.contrib</groupId>
+  <artifactId>querydsl-contrib</artifactId>
+  <name>Querydsl Contrib</name>
+  <description>parent project for Querydsl Contrib modules</description>
+  <url>${project.homepage}</url>
+
+  <parent>
+    <groupId>com.querydsl</groupId>
+    <artifactId>querydsl-root</artifactId>
+    <version>4.0.3.BUILD-SNAPSHOT</version>
+  </parent>
+
+  <packaging>pom</packaging>
+
+  <inceptionYear>2014</inceptionYear>
+
+  <properties>
+    <failIfNoTests>false</failIfNoTests>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.homepage>http://www.querydsl.com</project.homepage>
+    <project.githubpage>http://github.com/querydsl/querydsl-contrib</project.githubpage>
+    <project.checkout>scm:git:git@github.com:querydsl/querydsl-contrib.git</project.checkout>
+
+    <!-- Import-Package definitions for maven-bundle-plugin -->
+    <osgi.import.package.root>
+      com.google.common.*;version=${@},
+      *
+    </osgi.import.package.root>
+    <osgi.import.package>${osgi.import.package.root}</osgi.import.package>
+  </properties>
+
+  <scm>
+    <connection>${project.checkout}</connection>
+    <developerConnection>${project.checkout}</developerConnection>
+    <url>${project.githubpage}</url>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <modules>
+    <module>querydsl-dynamodb</module>
+    <module>querydsl-hazelcast</module>
+    <module>querydsl-elasticsearch</module>
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.querydsl</groupId>
+      <artifactId>querydsl-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+    </dependency>
+
+    <!-- test -->
+    <dependency>
+      <groupId>com.querydsl</groupId>
+      <artifactId>querydsl-core</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>snapshots-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+</project>
