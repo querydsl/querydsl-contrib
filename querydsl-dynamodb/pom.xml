@@ -4,9 +4,9 @@
 
   <parent>
     <groupId>com.mysema.querydsl.contrib</groupId>
-    <artifactId>querydsl-root</artifactId>
-    <version>3.6.1.BUILD-SNAPSHOT</version>
-    <relativePath>../querydsl-root/pom.xml</relativePath>
+    <artifactId>querydsl-contrib</artifactId>
+    <version>3.6.6.BUILD-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>querydsl-dynamodb</artifactId>

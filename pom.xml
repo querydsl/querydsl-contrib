@@ -3,7 +3,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.mysema.querydsl.contrib</groupId>
-  <artifactId>querydsl-root</artifactId>
+  <artifactId>querydsl-contrib</artifactId>
   <name>Querydsl Contrib</name>
   <description>parent project for Querydsl Contrib modules</description>
   <url>${project.homepage}</url>
@@ -11,7 +11,7 @@
   <parent>
     <groupId>com.mysema.querydsl</groupId>
     <artifactId>querydsl-root</artifactId>
-    <version>3.6.1.BUILD-SNAPSHOT</version>
+    <version>3.6.6.BUILD-SNAPSHOT</version>
   </parent>
 
   <packaging>pom</packaging>
@@ -47,9 +47,9 @@
   </licenses>
 
   <modules>
-    <module>../querydsl-dynamodb</module>
-    <module>../querydsl-hazelcast</module>
-    <module>../querydsl-elasticsearch</module>
+    <module>querydsl-dynamodb</module>
+    <module>querydsl-hazelcast</module>
+    <module>querydsl-elasticsearch</module>
   </modules>
 
 </project>
