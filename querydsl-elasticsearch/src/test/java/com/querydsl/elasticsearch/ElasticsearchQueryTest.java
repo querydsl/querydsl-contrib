@@ -54,7 +54,7 @@ public class ElasticsearchQueryTest {
     @BeforeClass
     public static void beforeClass() {
         String path  = ElasticsearchQueryTest.class.getResource("").getPath();
-        path = System.getProperty( "os.name" ).contains( "indow" ) ? path.substring(1) : path;
+        path = System.getProperty("os.name").contains("indow") ? path.substring(1) : path;
         Settings.Builder settings = Settings.builder().put("path.home",path);
         Node node = NodeBuilder.nodeBuilder().local(true).settings(settings).node();
         client = node.client();
