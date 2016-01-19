@@ -50,6 +50,7 @@
     <module>querydsl-dynamodb</module>
     <module>querydsl-hazelcast</module>
     <module>querydsl-elasticsearch</module>
+    <module>querydsl-elasticsearch2</module>
   </modules>
 
   <dependencies>
