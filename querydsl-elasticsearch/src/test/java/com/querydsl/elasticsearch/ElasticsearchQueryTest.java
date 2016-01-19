@@ -118,6 +118,16 @@ public class ElasticsearchQueryTest {
     }
 
     @Test
+    public void Contains_Ignore_Case() {
+        assertTrue(where(user.firstName.containsIgnoreCase("akk")).fetchCount() > 0);
+    }
+
+    @Test
+    public void Contains_Ignore_Case_2() {
+        assertFalse(where(user.firstName.containsIgnoreCase("xyzzz")).fetchCount() > 0);
+    }
+
+    @Test
     public void Equals_Ignore_Case() {
         assertTrue(where(user.firstName.equalsIgnoreCase("jAaKko")).fetchCount() > 0);
         assertTrue(where(user.firstName.equalsIgnoreCase("AaKk")).fetchCount() == 0);

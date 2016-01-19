@@ -212,6 +212,10 @@ public class ElasticsearchSerializer implements Visitor<Object, BoolQueryBuilder
             String value = StringUtils.toString(asDBValue(expr, 1));
             return QueryBuilders.queryString("*" + value + "*").field(asDBKey(expr, 0)).analyzeWildcard(true);
 
+        } else if (op == Ops.STRING_CONTAINS_IC) {
+            String value = StringUtils.toString(asDBValue(expr, 1));
+            return QueryBuilders.queryString("*" + value + "*").field(asDBKey(expr, 0)).analyzer("standard").analyzeWildcard(true);
+
         } else if (op == Ops.NOT) {
             // Handle the not's child
             BoolQueryBuilder subContext = QueryBuilders.boolQuery();
