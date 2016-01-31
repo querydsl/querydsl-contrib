@@ -4,6 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.querydsl.contrib</groupId>
   <artifactId>querydsl-contrib</artifactId>
+  <version>4.0.9.BUILD-SNAPSHOT</version>
   <name>Querydsl Contrib</name>
   <description>parent project for Querydsl Contrib modules</description>
   <url>${project.homepage}</url>
