@@ -11,31 +11,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.querydsl.elasticsearch;
+package com.querydsl.dynamodb;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import org.elasticsearch.client.Client;
-import org.junit.Test;
-
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.mysema.codegen.CodeWriter;
 import com.querydsl.apt.QuerydslAnnotationProcessor;
 import com.querydsl.codegen.CodegenModule;
 import com.querydsl.core.types.Expression;
+import com.querydsl.dynamodb.apt.DynamoAnnotationProcessor;
+import org.junit.Test;
 
 public class PackageVerification {
 
     @Test
     public void Verify_Package() throws Exception {
         String version = System.getProperty("version");
-        verify(new File("target/querydsl-elasticsearch-" + version + "-apt-one-jar.jar"));
+        verify(new File("target/querydsl-dynamodb-" + version + "-apt-one-jar.jar"));
     }
 
     private void verify(File oneJar) throws Exception {
@@ -45,12 +44,11 @@ public class PackageVerification {
         oneJarClassLoader.loadClass(Expression.class.getName()); // querydsl-core
         oneJarClassLoader.loadClass(CodeWriter.class.getName()); // codegen
         oneJarClassLoader.loadClass(CodegenModule.class.getName()).newInstance();
-        oneJarClassLoader.loadClass(Client.class.getName()); // elasticsearch
-        oneJarClassLoader.loadClass(ElasticsearchSerializer.class.getName()); // elasticsearch
+        oneJarClassLoader.loadClass(AmazonDynamoDB.class.getName()); // DynamoDB
         Class cl = oneJarClassLoader.loadClass(QuerydslAnnotationProcessor.class.getName()); // querydsl-apt
         cl.newInstance();
         String resourceKey = "META-INF/services/javax.annotation.processing.Processor";
-        assertEquals(QuerydslAnnotationProcessor.class.getName(), Resources.toString(oneJarClassLoader.findResource(resourceKey), Charsets.UTF_8));
+        assertEquals(DynamoAnnotationProcessor.class.getName(), Resources.toString(oneJarClassLoader.findResource(resourceKey), Charsets.UTF_8));
     }
 
 }
