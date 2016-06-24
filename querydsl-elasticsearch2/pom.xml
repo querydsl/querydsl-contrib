@@ -9,8 +9,8 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>querydsl-elasticsearch</artifactId>
-  <name>Querydsl - Elasticsearch support</name>
+  <artifactId>querydsl-elasticsearch2</artifactId>
+  <name>Querydsl - Elasticsearch support 2.x</name>
   <description>Elasticsearch support for Querydsl</description>
   <packaging>jar</packaging>
   <url>${project.homepage}</url>
@@ -22,8 +22,8 @@
   </scm>
 
   <properties>
-    <elasticsearch.version>1.3.4</elasticsearch.version>
-    <jackson.version>2.4.2</jackson.version>
+    <elasticsearch.version>2.2.2</elasticsearch.version>
+    <jackson.version>2.6.5</jackson.version>
     <osgi.import.package>
       org.elasticsearch.*;version="0.0.0",
       com.fasterxml.jackson.core.*;version="0.0.0",
@@ -118,7 +118,7 @@
             <goals>
               <goal>test</goal>
             </goals>
-            <phase>test</phase>
+            <phase>verify</phase>
             <configuration>
               <systemProperties>
                 <property>
@@ -127,7 +127,7 @@
                 </property>
               </systemProperties>
               <includes>
-                <include>com/querydsl/elasticsearch/PackageVerification.java</include>
+                <include>com/querydsl/elasticsearch2/PackageVerification.java</include>
               </includes>
             </configuration>
           </execution>

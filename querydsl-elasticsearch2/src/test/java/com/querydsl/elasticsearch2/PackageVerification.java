@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.querydsl.elasticsearch;
+package com.querydsl.elasticsearch2;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -35,7 +35,7 @@ public class PackageVerification {
     @Test
     public void Verify_Package() throws Exception {
         String version = System.getProperty("version");
-        verify(new File("target/querydsl-elasticsearch-" + version + "-apt-one-jar.jar"));
+        verify(new File("target/querydsl-elasticsearch2-" + version + "-apt-one-jar.jar"));
     }
 
     private void verify(File oneJar) throws Exception {
