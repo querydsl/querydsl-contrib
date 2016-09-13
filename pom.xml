@@ -32,6 +32,7 @@
       *
     </osgi.import.package.root>
     <osgi.import.package>${osgi.import.package.root}</osgi.import.package>
+    <querydsl.version>${project.version}</querydsl.version>
   </properties>
 
   <scm>
@@ -58,7 +59,7 @@
     <dependency>
       <groupId>com.querydsl</groupId>
       <artifactId>querydsl-core</artifactId>
-      <version>${project.version}</version>
+      <version>${querydsl.version}</version>
     </dependency>
 
     <dependency>
@@ -74,7 +75,7 @@
     <dependency>
       <groupId>com.querydsl</groupId>
       <artifactId>querydsl-core</artifactId>
-      <version>${project.version}</version>
+      <version>${querydsl.version}</version>
       <scope>test</scope>
       <type>test-jar</type>
     </dependency>
