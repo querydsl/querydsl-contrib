@@ -1,8 +1,8 @@
 package com.querydsl.elasticsearch2;
 
 import static java.util.Arrays.asList;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.elasticsearch.client.Requests.refreshRequest;
 import static org.junit.Assert.*;
 
@@ -227,6 +227,16 @@ public class ElasticsearchQueryTest {
     @Test
     public void Enum_Ne() {
         assertQuery(user.gender.ne(User.Gender.MALE));
+    }
+
+    @Test
+    public void IsNotNull() {
+      assertQuery(user.firstName.isNotNull(), u3, u4, u2, u1);
+    }
+
+    @Test
+    public void IsNull() {
+      assertQuery(user.firstName.isNull());
     }
 
     private ElasticsearchQuery<User> query() {

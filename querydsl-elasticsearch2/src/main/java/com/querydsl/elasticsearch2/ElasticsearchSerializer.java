@@ -178,6 +178,12 @@ public class ElasticsearchSerializer implements Visitor<Object, BoolQueryBuilder
             Object to = asDBValue(expr, 2);
             return QueryBuilders.rangeQuery(asDBKey(expr, 0)).from(from).to(to);
 
+        } else if (op == Ops.IS_NOT_NULL) {
+            return QueryBuilders.existsQuery(asDBKey(expr, 0));
+
+        } else if (op == Ops.IS_NULL) {
+            return new BoolQueryBuilder().mustNot(QueryBuilders.existsQuery(asDBKey(expr, 0)));
+
         } else if (op == Ops.LT) {
             return QueryBuilders.rangeQuery(asDBKey(expr, 0)).lt(asDBValue(expr, 1));
 
@@ -223,7 +229,7 @@ public class ElasticsearchSerializer implements Visitor<Object, BoolQueryBuilder
 
         }
 
-        throw new UnsupportedOperationException("Illegal operation " + expr);
+        throw new UnsupportedOperationException("Illegal operation " + op + ": " + expr);
     }
 
     @Nullable
