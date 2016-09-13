@@ -22,8 +22,10 @@
   </scm>
 
   <properties>
-    <elasticsearch.version>2.2.2</elasticsearch.version>
+    <elasticsearch.version>2.4.0</elasticsearch.version>
     <jackson.version>2.6.5</jackson.version>
+    <querydsl.version>4.1.4</querydsl.version>
+
     <osgi.import.package>
       org.elasticsearch.*;version="0.0.0",
       com.fasterxml.jackson.core.*;version="0.0.0",
@@ -55,7 +57,7 @@
     <dependency>
       <groupId>com.querydsl</groupId>
       <artifactId>querydsl-apt</artifactId>
-      <version>${project.version}</version>
+      <version>${querydsl.version}</version>
       <scope>provided</scope>
     </dependency>
 
