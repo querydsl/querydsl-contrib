@@ -3,6 +3,7 @@ package com.querydsl.elasticsearch;
 import static java.util.Arrays.asList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 import static org.elasticsearch.client.Requests.refreshRequest;
 import static org.junit.Assert.*;
 
@@ -16,7 +17,7 @@ import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.Requests;
-import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
 import org.junit.Before;
@@ -52,7 +53,9 @@ public class ElasticsearchQueryTest {
 
     @BeforeClass
     public static void beforeClass() {
-        ImmutableSettings.Builder settings = ImmutableSettings.builder().put("path.data", ElasticsearchQueryTest.class.getResource("").getPath());
+        String path  = ElasticsearchQueryTest.class.getResource("").getPath();
+        path = System.getProperty("os.name").contains("indow") ? path.substring(1) : path;
+        Settings.Builder settings = Settings.builder().put("path.home",path);
         Node node = NodeBuilder.nodeBuilder().local(true).settings(settings).node();
         client = node.client();
 
@@ -115,6 +118,16 @@ public class ElasticsearchQueryTest {
     @Test
     public void NotContains() {
         //assertQuery(user.friends.contains(u1).not(), u1);
+    }
+
+    @Test
+    public void Contains_Ignore_Case() {
+        assertTrue(where(user.firstName.containsIgnoreCase("akk")).fetchCount() > 0);
+    }
+
+    @Test
+    public void Contains_Ignore_Case_2() {
+        assertFalse(where(user.firstName.containsIgnoreCase("xyzzz")).fetchCount() > 0);
     }
 
     @Test
@@ -295,7 +308,7 @@ public class ElasticsearchQueryTest {
     }
 
     public void refresh(String indexName, boolean waitForOperation) {
-        client.admin().indices().refresh(refreshRequest(indexName).force(waitForOperation)).actionGet();
+        client.admin().indices().refresh(refreshRequest(indexName)).actionGet();
     }
 
 }

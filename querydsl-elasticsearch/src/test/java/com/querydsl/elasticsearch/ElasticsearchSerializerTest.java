@@ -257,7 +257,7 @@ public class ElasticsearchSerializerTest {
     }
 
     public static QueryBuilder eq(String key, Object value) {
-        return QueryBuilders.queryString(StringUtils.toString(value)).field(key);
+        return QueryBuilders.queryStringQuery(StringUtils.toString(value)).field(key);
     }
 
     public static QueryBuilder in(String key, Iterable<?> values) {

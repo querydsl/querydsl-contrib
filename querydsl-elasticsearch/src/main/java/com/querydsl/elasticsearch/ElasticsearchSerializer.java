@@ -93,12 +93,12 @@ public class ElasticsearchSerializer implements Visitor<Object, BoolQueryBuilder
             } else {
                 // Currently all queries are made with ignore case sensitive
                 // Because the query to get exact value have to be run on a not_analyzed field
-                return QueryBuilders.queryString(value).field(asDBKey(expr, 0));
+                return QueryBuilders.queryStringQuery(value).field(asDBKey(expr, 0));
             }
 
         } else if (op == Ops.EQ_IGNORE_CASE) {
             String value = StringUtils.toString(asDBValue(expr, 1));
-            return QueryBuilders.queryString(value).field(asDBKey(expr, 0));
+            return QueryBuilders.queryStringQuery(value).field(asDBKey(expr, 0));
 
         } else if (op == Ops.NE) {
             // Decompose the query as NOT and EQ query
@@ -112,7 +112,7 @@ public class ElasticsearchSerializer implements Visitor<Object, BoolQueryBuilder
                     context);
 
         } else if (op == Ops.STRING_IS_EMPTY) {
-            return QueryBuilders.queryString("").field(asDBKey(expr, 0));
+            return QueryBuilders.queryStringQuery("").field(asDBKey(expr, 0));
 
         } else if (op == Ops.AND || op == Ops.OR) {
             Operation<?> left = (Operation<?>) expr.getArg(0);
@@ -156,7 +156,7 @@ public class ElasticsearchSerializer implements Visitor<Object, BoolQueryBuilder
                 if (Collection.class.isAssignableFrom(expr.getArg(constIndex).getType())) {
                     Collection<?> values = (Collection<?>) ((Constant<?>) expr.getArg(constIndex)).getConstant();
                     for (Object value : values) {
-                        boolQuery.should(QueryBuilders.queryString(StringUtils.toString(value)).field(key));
+                        boolQuery.should(QueryBuilders.queryStringQuery(StringUtils.toString(value)).field(key));
                     }
                     return boolQuery;
 
@@ -193,24 +193,28 @@ public class ElasticsearchSerializer implements Visitor<Object, BoolQueryBuilder
         } else if (op == Ops.STARTS_WITH) {
             // Currently all queries are made with ignore case sensitive
             String value = StringUtils.toString(asDBValue(expr, 1));
-            return QueryBuilders.queryString(value + "*").field(asDBKey(expr, 0)).analyzeWildcard(true);
+            return QueryBuilders.queryStringQuery(value + "*").field(asDBKey(expr, 0)).analyzeWildcard(true);
 
         } else if (op == Ops.STARTS_WITH_IC) {
             String value = StringUtils.toString(asDBValue(expr, 1));
-            return QueryBuilders.queryString(value + "*").field(asDBKey(expr, 0)).analyzeWildcard(true);
+            return QueryBuilders.queryStringQuery(value + "*").field(asDBKey(expr, 0)).analyzeWildcard(true);
 
         } else if (op == Ops.ENDS_WITH) {
             // Currently all queries are made with ignore case sensitive
             String value = StringUtils.toString(asDBValue(expr, 1));
-            return QueryBuilders.queryString("*" + value).field(asDBKey(expr, 0)).analyzeWildcard(true);
+            return QueryBuilders.queryStringQuery("*" + value).field(asDBKey(expr, 0)).analyzeWildcard(true);
 
         } else if (op == Ops.ENDS_WITH_IC) {
             String value = StringUtils.toString(asDBValue(expr, 1));
-            return QueryBuilders.queryString("*" + value).field(asDBKey(expr, 0)).analyzeWildcard(true);
+            return QueryBuilders.queryStringQuery("*" + value).field(asDBKey(expr, 0)).analyzeWildcard(true);
 
         } else if (op == Ops.STRING_CONTAINS) {
             String value = StringUtils.toString(asDBValue(expr, 1));
-            return QueryBuilders.queryString("*" + value + "*").field(asDBKey(expr, 0)).analyzeWildcard(true);
+            return QueryBuilders.queryStringQuery("*" + value + "*").field(asDBKey(expr, 0)).analyzeWildcard(true);
+
+        } else if (op == Ops.STRING_CONTAINS_IC) {
+            String value = StringUtils.toString(asDBValue(expr, 1));
+            return QueryBuilders.queryStringQuery("*" + value + "*").field(asDBKey(expr, 0)).analyzer("standard").analyzeWildcard(true);
 
         } else if (op == Ops.NOT) {
             // Handle the not's child
